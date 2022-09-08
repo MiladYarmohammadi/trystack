@@ -3,7 +3,7 @@ from trystack.decorator import json_required
 from trystack.model import Project
 from trystack.schema.apiv1 import ProjectSchema
 from trystack.trystack import db
-from trystack.util import jsonify, datetime_now
+from trystack.util import jsonify, now
 
 
 class ProjectController:
@@ -82,7 +82,7 @@ class ProjectController:
         if project is None:
             return jsonify(status=404)
         project.status = request_data["status"]
-        project.updated_at = datetime_now()
+        project.updated_at = now()
         try:
             db.session.commit()
         except Exception as e:

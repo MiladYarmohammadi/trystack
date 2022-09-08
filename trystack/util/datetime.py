@@ -1,5 +1,5 @@
 from datetime import datetime
 
 
-def datetime_now():
+def now():
     return datetime.now()
