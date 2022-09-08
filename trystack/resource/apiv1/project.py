@@ -29,7 +29,7 @@ class ProjectResource(Resource):
     """
 
     def patch(self, project_id):
-        return ProjectController.patch_project(project_id)
+        return ProjectController.update_project(project_id)
 
     """
     DELETE /projects --> Not Allowed
