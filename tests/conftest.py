@@ -1,6 +1,6 @@
 import pytest
 
-from trystack import create_app
+from trystack.trystack import create_app
 
 
 @pytest.fixture
