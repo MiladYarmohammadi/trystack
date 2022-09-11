@@ -7,4 +7,4 @@ COPY . /
 WORKDIR /
 
 ENTRYPOINT ["gunicorn"]
-CMD ["trystack:create_app"]
+CMD ["trystack:create_app()"]
