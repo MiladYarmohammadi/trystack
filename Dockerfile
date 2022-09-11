@@ -7,6 +7,6 @@ RUN pip install -r /requirements.txt
 COPY . /
 WORKDIR /
 
-RUN flask db upgrade
-ENTRYPOINT ["gunicorn"]
-CMD ["trystack:create_app()"]
+RUN flask --app trystack db upgrade
+ENTRYPOINT ["flask"]
+CMD ["run"]
