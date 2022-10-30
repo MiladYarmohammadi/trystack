@@ -1,12 +1,10 @@
 FROM python:3.10
 
-COPY requirements.txt /
+RUN mkdir -p /app
+COPY requirements.txt /app/requirements.txt
 RUN pip install -U pip setuptools
-RUN pip install -r /requirements.txt
-
-COPY . /
-WORKDIR /
-ENV TRYSTACK_API_DATABASE_URI=mysql+pymysql://root:yjMtjiBepvKI6cHqTHPc0BFvMaTK0hh6@trystkdb.miladsphinx.svc:3306/trystack
-RUN flask db upgrade
-ENTRYPOINT ["flask"]
-CMD ["run"]
+RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
+WORKDIR /app
+COPY . /app
+ENV TRYSTACK_API_DATABASE_URI="mysql+pymysql://root:trystack@mydb-mysql-primary:3306/trystack"
+CMD flask db migrate && flask db upgrade && flask run
