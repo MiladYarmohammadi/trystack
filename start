@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ ! -f "./.inited" -o ! -z "$TRYSTACK_API_FORCE_DB_UPGRADE" ]; then
+    echo "Going to run database migration..."
+    python test.py
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+    flask db upgrade
+    touch .inited
+fi
+
+gunicorn -b "0.0.0.0:8000 -w 2 --access-logfile - --error-logfile - "trystack:create_app()"
